@@ -8,10 +8,6 @@ class Solution:
             if start == len(input_array) // 2:
                 return
             else:
-                tmp = input_array[start]
-                input_array[start] = input_array[end]
-                input_array[end] = tmp
-                start += 1
-                end -= 1
-                return helper(input_array,start, end)
+                input_array[start], input_array[end] = input_array[end], input_array[start]
+                return helper(input_array, start + 1, end -1)
         helper(s, 0, len(s) - 1)
