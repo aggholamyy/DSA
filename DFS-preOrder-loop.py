@@ -117,3 +117,31 @@ visited_left: {self.visited_left}
 visited_right: {self.visited_right}
         """
     return s
+
+def preorder_with_stack(node):
+  visited_list = list()
+  state = State(node)
+  stack = Stack()
+  stack.push(state)
+  visited_list.append(node.get_value())
+  while (node):
+    if node.has_left_child() and not state.get_visited_left():
+      state.set_visited_left()
+      node = node.get_left_child()
+      state = State(node)
+      stack.push(state)
+      visited_list.append(node.get_value())
+    elif node.has_right_child() and not state.get_visited_right():
+      state.set_visited_right()
+      node = node.get_right_child()
+      state = State(node)
+      stack.push(state)
+      visited_list.append(node.get_value())
+    else:
+      stack.pop()
+      if stack.is_empty():
+        node = None
+      else:
+        state = stack.top()
+        node = state.get_node()
+  return visited_list
