@@ -8,20 +8,16 @@ I want to keep this to track the evolution process of my solution.
 
 def travers_preorder_bsd(node):
   visited_list = list()
-#########################
-# visited_list must be init by root
-#  visited_list.append(node)
-  #########################
-
+  
   def traveler(node, visited_list):
     if node is None:
       return visited_list
     current_node = node
     visited_list.append(current_node)
-    node = node.get_left_child()
-    traveler(node, visited_list)
-    node = current_node.get_right_child()
-    traveler(node, visited_list)
+    #node = node.get_left_child()
+    traveler(node.get_left_child(), visited_list)
+    #node = current_node.get_right_child()
+    traveler(current_node.get_right_child(), visited_list)
     return visited_list
   traveler(root, visited_list)
   return visited_list
