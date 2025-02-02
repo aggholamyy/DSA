@@ -7,25 +7,24 @@ I want to keep this to track the evolution process of my solution.
 """
 
 def pre_order(tree):
-    root = tree.get_root()
-    node = root
-    visited_list = list()
-    def travers_left(node, visited_list):
-        if node is None:
-            return visited_list
-        else:
-            visited_list.append(node)
-            node = node.get_left_child()
-            travers_left(node, visited_list)
-    def travers_right(node, visited_list):
-        if node is None:
-            return visited_list
-        else:
-            node = node.get_right_child()
-            if node:
-                visited_list.append(node)
-            travers_right(node, visited_list)
-  
-    travers_left(root, visited_list)
-    travers_right(root, visited_list)
+  visited_list = list()
+#########################
+# visited_list must be init by root
+  visited_list.append(node)
+  #########################
+
+  def traveler(node, visited_list):
+    if node is None:
+      return visited_list
+    current_node = node
+    node = node.get_left_child()
+    if node:
+      visited_list.append(node)
+    visited_list = traveler(node, visited_list)
+    node = current_node.get_right_child()
+    if node:
+      visited_list.append(node)
+    visited_list = traveler(node, visited_list)
     return visited_list
+  traveler(root, visited_list)
+  return visited_list
